@@ -39,7 +39,27 @@ class jogosController extends Controller
         }
 
 
+
+
    }
 
+    public function update(Request $request, $id){
+       // dd($request);
+       $data = [
+        'nome' => $request->nome,
+        'categoria'=> $request->categoria,
+        'ano_criacao'=> $request->ano_criacao,
+        'valor'=> $request->valor,
 
+       ];
+       jogo::where('id',$id)->update($data);
+       return redirect()->route('jogos-index');
+
+    }
+
+    public function destroy($id){
+        //dd($id);
+        jogo::where('id', $id)->delete();
+        return redirect()->route('jogos-index');
+    }
 }
